@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IT On Your Terms</title>
+<meta name="description" content="Corporate tech by day. Your IT problems by choice. Laptops, security, AI — you pay what you feel, no obligation.">
+<link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#faf7f2">
+<style>
+  :root {
+    --bg: #faf7f2;
+    --bg-soft: #f2ece1;
+    --card: #fffdf9;
+    --dark: #191411;
+    --text: #262019;
+    --muted: #7c7264;
+    --warm: #f2a43c;
+    --coral: #f0705a;
+    --sage: #9db89a;
+    --on-dark: #f7f2ea;
+    --muted-dark: #a89b8a;
+    --maxw: 980px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased; letter-spacing: -0.01em;
+    overflow-x: hidden;
+  }
+
+  /* ---------- floating orbs ---------- */
+  .orbs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .orb { position: absolute; border-radius: 50%; filter: blur(90px); will-change: transform; }
+  .orb-1 { width: 52vw; height: 52vw; min-width: 420px; min-height: 420px; left: -12vw; top: -14vh;
+    background: radial-gradient(circle at 35% 35%, rgba(255, 190, 96, 0.62), rgba(255, 190, 96, 0) 70%);
+    animation: drift1 34s ease-in-out infinite alternate; }
+  .orb-2 { width: 44vw; height: 44vw; min-width: 380px; min-height: 380px; right: -10vw; top: 6vh;
+    background: radial-gradient(circle at 40% 40%, rgba(240, 112, 90, 0.40), rgba(240, 112, 90, 0) 70%);
+    animation: drift2 42s ease-in-out infinite alternate; }
+  .orb-3 { width: 40vw; height: 40vw; min-width: 340px; min-height: 340px; left: 8vw; bottom: -16vh;
+    background: radial-gradient(circle at 45% 45%, rgba(157, 184, 154, 0.42), rgba(157, 184, 154, 0) 70%);
+    animation: drift3 38s ease-in-out infinite alternate; }
+  .orb-4 { width: 30vw; height: 30vw; min-width: 280px; min-height: 280px; right: 14vw; bottom: 10vh;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 214, 150, 0.50), rgba(255, 214, 150, 0) 70%);
+    animation: drift4 29s ease-in-out infinite alternate; }
+  @keyframes drift1 { from { transform: translate(0, 0) scale(1); } to { transform: translate(9vw, 7vh) scale(1.18); } }
+  @keyframes drift2 { from { transform: translate(0, 0) scale(1.1); } to { transform: translate(-8vw, 9vh) scale(0.92); } }
+  @keyframes drift3 { from { transform: translate(0, 0) scale(0.95); } to { transform: translate(7vw, -8vh) scale(1.15); } }
+  @keyframes drift4 { from { transform: translate(0, 0) scale(1.05); } to { transform: translate(-6vw, -6vh) scale(0.9); } }
+  @media (prefers-reduced-motion: reduce) {
+    .orb { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  .page { position: relative; z-index: 1; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  /* nav */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    backdrop-filter: saturate(160%) blur(20px);
+    -webkit-backdrop-filter: saturate(160%) blur(20px);
+    background: rgba(250, 247, 242, 0.72);
+    border-bottom: 1px solid rgba(140, 110, 70, 0.10);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 52px; }
+  nav .wordmark { font-size: 17px; font-weight: 650; letter-spacing: -0.01em; }
+  nav a.nav-cta {
+    font-size: 13px; color: #fff; text-decoration: none; border-radius: 980px; padding: 7px 16px;
+    background: linear-gradient(120deg, var(--warm), var(--coral));
+    box-shadow: 0 4px 14px rgba(240, 112, 90, 0.28);
+  }
+
+  /* hero */
+  .hero { text-align: center; padding: 110px 0 90px; }
+  .hero h1 { font-size: clamp(44px, 7vw, 80px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.05; }
+  .hero h1 span {
+    background: linear-gradient(115deg, var(--warm) 10%, var(--coral) 90%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero .sub { margin: 26px auto 0; max-width: 640px; font-size: 21px; line-height: 1.5; color: var(--muted); }
+  .hero .btns { margin-top: 40px; display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+  .btn { display: inline-block; border-radius: 980px; padding: 14px 32px; font-size: 17px; font-weight: 500; text-decoration: none; }
+  .btn.primary {
+    background: linear-gradient(120deg, var(--warm), var(--coral)); color: #fff;
+    box-shadow: 0 8px 24px rgba(240, 112, 90, 0.30);
+  }
+  .btn.ghost { color: var(--coral); }
+  .btn.ghost::after { content: " ›"; }
+
+  /* sections */
+  section { padding: 96px 0; position: relative; }
+  section.alt { background: linear-gradient(180deg, rgba(242, 236, 225, 0.75), rgba(242, 236, 225, 0.45)); }
+  section.dark { background: var(--dark); color: var(--on-dark); }
+  .sec-head { text-align: center; margin-bottom: 64px; }
+  .sec-head h2 { font-size: clamp(32px, 4.6vw, 48px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+  .sec-head p { margin-top: 14px; font-size: 19px; color: var(--muted); }
+  section.dark .sec-head p { color: var(--muted-dark); }
+
+  /* tiles */
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 760px) { .trio { grid-template-columns: 1fr; } }
+  .tile { background: var(--card); border-radius: 28px; padding: 44px 34px; min-height: 300px;
+    box-shadow: 0 6px 24px rgba(140, 100, 50, 0.08); }
+  .tile h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.015em; }
+  .tile p { margin-top: 12px; font-size: 17px; line-height: 1.5; color: var(--muted); }
+  .tile .k { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 14px;
+    background: var(--bg-soft); font-size: 22px; margin-bottom: 22px; }
+
+  /* steps */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 760px) { .steps { grid-template-columns: 1fr; } }
+  .step { padding: 8px 26px; }
+  .step .n { font-size: 60px; font-weight: 700; letter-spacing: -0.03em; color: rgba(247, 242, 234, 0.20); }
+  .step h3 { font-size: 24px; font-weight: 700; margin-top: 14px; letter-spacing: -0.015em; }
+  .step p { margin-top: 10px; font-size: 17px; color: var(--muted-dark); line-height: 1.5; }
+
+  /* pay */
+  .pay { text-align: center; padding: 104px 0; }
+  .pay h2 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.08; }
+  .pay p { margin: 24px auto 0; max-width: 580px; font-size: 20px; line-height: 1.5; color: var(--muted); }
+
+  /* contact */
+  .contact { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 760px) { .contact { grid-template-columns: 1fr; } }
+  .c-card { background: var(--card); border-radius: 28px; padding: 40px 34px; text-decoration: none; color: inherit; display: block;
+    box-shadow: 0 6px 24px rgba(140, 100, 50, 0.08); }
+  .c-card .k { display: block; font-size: 30px; margin-bottom: 18px; }
+  .c-card h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.015em; }
+  .c-card p { margin-top: 10px; font-size: 17px; color: var(--muted); line-height: 1.5; }
+  .c-card .go { display: inline-block; margin-top: 18px; font-size: 17px; font-weight: 650; color: var(--coral); }
+  .c-card .go::after { content: " ›"; }
+
+  /* footer */
+  footer { position: relative; background: rgba(242, 236, 225, 0.7); padding: 40px 0; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="orbs" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+</div>
+
+<div class="page">
+
+<nav>
+  <div class="wrap">
+    <span class="wordmark">IT On Your Terms</span>
+    <a class="nav-cta" href="#contact">Get in touch</a>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <h1>IT help,<br><span>on your terms.</span></h1>
+  <p class="sub">
+    Laptops, security, AI — if it's technology and it's getting in the way of your life, I can help.
+    You pay what you feel it's worth. No contracts, no meter, no obligation.
+  </p>
+  <div class="btns">
+    <a class="btn primary" href="#contact">Get in touch</a>
+    <a class="btn ghost" href="#help">What I help with</a>
+  </div>
+</header>
+
+<section class="alt" id="help">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>What I help with.</h2>
+      <p>Three things, done properly. And a catch-all for the rest.</p>
+    </div>
+    <div class="trio">
+      <div class="tile">
+        <span class="k">💻</span>
+        <h3>Everyday IT</h3>
+        <p>Laptops, phones, Wi-Fi, printers, backups. The stuff that quietly eats your week — diagnosed, not guessed.</p>
+      </div>
+      <div class="tile">
+        <span class="k">🛡️</span>
+        <h3>Cyber security</h3>
+        <p>Passwords, 2FA, spotting scams, hardening your home or business — and a clear plan if something's already gone wrong.</p>
+      </div>
+      <div class="tile">
+        <span class="k">🤖</span>
+        <h3>AI</h3>
+        <p>Which tools are actually worth your time, how to get real use from them, and what not to trust them with.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dark" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>How it works.</h2>
+      <p>Three steps. The last one is deliberately soft.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="n">1</div>
+        <h3>Tell me what's going on.</h3>
+        <p>A message is enough — a sentence, a photo, a voice note. No forms, no ticketing, no jargon required.</p>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <h3>I help — however suits you.</h3>
+        <p>A call, a screen-share, or a written walkthrough. Most small things get sorted in one go.</p>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <h3>You pay what you feel.</h3>
+        <p>From coffee money to the equivalent of a good hour — or nothing at all, and a thank-you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pay">
+  <div class="wrap">
+    <h2>No obligation.<br>That's the point.</h2>
+    <p>I have a normal corporate tech career. This is the part of the week I choose — because helping is the bit I actually like. Whatever you send, it keeps this a thing I get to do.</p>
+  </div>
+</section>
+
+<section class="alt" id="contact">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Get in touch.</h2>
+      <p>Two ways. Both end with the same place: a conversation.</p>
+    </div>
+    <div class="contact">
+      <a class="c-card" href="https://maps.app.goo.gl/zanBjrXngYF7TECXA?g_st=ic" target="_blank" rel="noopener">
+        <span class="k">📍</span>
+        <h3>On Google</h3>
+        <p>See what other people say, read the reviews, leave one yourself if it earned it.</p>
+        <span class="go">View my Google profile</span>
+      </a>
+      <a class="c-card" href="https://wa.me/971585109454" target="_blank" rel="noopener">
+        <span class="k">💬</span>
+        <h3>WhatsApp</h3>
+        <p>Fastest path. Voice, text, or a photo of the problem — +971 58 510 9454.</p>
+        <span class="go">Message me</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>IT On Your Terms · Dubai, UAE</div>
+    <div>No fine print. No spam, ever.</div>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>

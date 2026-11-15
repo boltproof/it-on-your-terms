@@ -1,4 +1,4 @@
-# IT On Your Terms
+# BoltProof — IT On Your Terms
 > IT help on your terms. Corporate tech by day; by choice I help people — friends, family, and strangers — with the technology in their lives. Laptops, phones, Wi-Fi, printers, passwords, 2FA, scams, network hardening, and AI. You pay what you feel it's worth, from coffee money to nothing at all. No contracts, no meter, no obligation, no spam.
 
 ## What I help with

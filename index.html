@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>IT On Your Terms</title>
-<meta name="description" content="Corporate tech by day. Your IT problems by choice. Laptops, security, AI — you pay what you feel, no obligation.">
+<title>BoltProof — IT help, on your terms</title>
+<meta name="description" content="BoltProof — IT help on your terms. Corporate tech by day; your IT problems by choice. Laptops, security, AI — you pay what you feel, no obligation.">
 <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta name="theme-color" content="#faf7f2">
@@ -57,7 +57,7 @@
   }
 
   .page { position: relative; z-index: 1; }
-  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
 
   /* nav */
   nav {
@@ -67,8 +67,10 @@
     background: rgba(250, 247, 242, 0.72);
     border-bottom: 1px solid rgba(140, 110, 70, 0.10);
   }
-  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 52px; }
-  nav .wordmark { font-size: 17px; font-weight: 650; letter-spacing: -0.01em; }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+  nav .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
+  nav .brand img { width: 26px; height: 26px; display: block; }
+  nav .brand span { font-size: 17px; font-weight: 700; letter-spacing: -0.015em; }
   nav a.nav-cta {
     font-size: 13px; color: #fff; text-decoration: none; border-radius: 980px; padding: 7px 16px;
     background: linear-gradient(120deg, var(--warm), var(--coral));
@@ -76,8 +78,9 @@
   }
 
   /* hero */
-  .hero { text-align: center; padding: 110px 0 90px; }
-  .hero h1 { font-size: clamp(44px, 7vw, 80px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.05; }
+  .hero { text-align: center; padding: 96px 0 80px; }
+  .hero .overline { font-size: 15px; font-weight: 650; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 22px; }
+  .hero h1 { font-size: clamp(40px, 7vw, 76px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.05; }
   .hero h1 span {
     background: linear-gradient(115deg, var(--warm) 10%, var(--coral) 90%);
     -webkit-background-clip: text; background-clip: text; color: transparent;
@@ -93,17 +96,17 @@
   .btn.ghost::after { content: " ›"; }
 
   /* sections */
-  section { padding: 96px 0; position: relative; }
+  section { padding: 88px 0; position: relative; }
   section.alt { background: linear-gradient(180deg, rgba(242, 236, 225, 0.75), rgba(242, 236, 225, 0.45)); }
   section.dark { background: var(--dark); color: var(--on-dark); }
-  .sec-head { text-align: center; margin-bottom: 64px; }
-  .sec-head h2 { font-size: clamp(32px, 4.6vw, 48px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
-  .sec-head p { margin-top: 14px; font-size: 19px; color: var(--muted); }
+  .sec-head { text-align: center; margin-bottom: 56px; }
+  .sec-head .mark { width: 52px; height: 52px; margin: 0 auto 18px; display: block; }
+  .sec-head h2 { font-size: clamp(30px, 4.6vw, 46px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+  .sec-head p { margin-top: 14px; font-size: 19px; color: var(--muted); max-width: 620px; margin-left: auto; margin-right: auto; }
   section.dark .sec-head p { color: var(--muted-dark); }
 
   /* tiles */
   .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  @media (max-width: 760px) { .trio { grid-template-columns: 1fr; } }
   .tile { background: var(--card); border-radius: 28px; padding: 44px 34px; min-height: 300px;
     box-shadow: 0 6px 24px rgba(140, 100, 50, 0.08); }
   .tile h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.015em; }
@@ -113,20 +116,20 @@
 
   /* steps */
   .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  @media (max-width: 760px) { .steps { grid-template-columns: 1fr; } }
   .step { padding: 8px 26px; }
   .step .n { font-size: 60px; font-weight: 700; letter-spacing: -0.03em; color: rgba(247, 242, 234, 0.20); }
   .step h3 { font-size: 24px; font-weight: 700; margin-top: 14px; letter-spacing: -0.015em; }
   .step p { margin-top: 10px; font-size: 17px; color: var(--muted-dark); line-height: 1.5; }
 
   /* pay */
-  .pay { text-align: center; padding: 104px 0; }
-  .pay h2 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.08; }
+  .pay { text-align: center; padding: 96px 0; }
+  .pay .mark { width: 64px; height: 64px; margin: 0 auto 24px; display: block; }
+  .pay h2 { font-size: clamp(34px, 5vw, 54px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.08; }
   .pay p { margin: 24px auto 0; max-width: 580px; font-size: 20px; line-height: 1.5; color: var(--muted); }
+  .pay .sign { margin-top: 28px; font-size: 15px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 
   /* contact */
   .contact { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  @media (max-width: 760px) { .contact { grid-template-columns: 1fr; } }
   .c-card { background: var(--card); border-radius: 28px; padding: 40px 34px; text-decoration: none; color: inherit; display: block;
     box-shadow: 0 6px 24px rgba(140, 100, 50, 0.08); }
   .c-card .k { display: block; font-size: 30px; margin-bottom: 18px; }
@@ -138,6 +141,26 @@
   /* footer */
   footer { position: relative; background: rgba(242, 236, 225, 0.7); padding: 40px 0; }
   footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+  footer .f-brand { display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--text); }
+  footer .f-brand img { width: 18px; height: 18px; }
+
+  /* ---------- mobile ---------- */
+  @media (max-width: 760px) {
+    .wrap { padding: 0 24px; }
+    .hero { padding: 64px 0 56px; }
+    .hero .overline { margin-bottom: 18px; }
+    section { padding: 60px 0; }
+    .sec-head { margin-bottom: 40px; }
+    .trio { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    .tile { min-height: 0; padding: 38px 28px; }
+    .step { padding: 8px 20px; }
+    .contact { grid-template-columns: 1fr; }
+    .c-card { padding: 34px 28px; }
+    .pay { padding: 72px 0; }
+    .hero .btns { flex-direction: column; align-items: stretch; }
+    .hero .btn { text-align: center; }
+  }
 </style>
 </head>
 <body>
@@ -153,12 +176,13 @@
 
 <nav>
   <div class="wrap">
-    <span class="wordmark">IT On Your Terms</span>
+    <a class="brand" href="#top"><img src="/assets/logo-128.png" alt="BoltProof logo">BoltProof</a>
     <a class="nav-cta" href="#contact">Get in touch</a>
   </div>
 </nav>
 
-<header class="hero wrap">
+<header class="hero wrap" id="top">
+  <p class="overline">BoltProof · Dubai, UAE</p>
   <h1>IT help,<br><span>on your terms.</span></h1>
   <p class="sub">
     Laptops, security, AI — if it's technology and it's getting in the way of your life, I can help.
@@ -199,6 +223,7 @@
 <section class="dark" id="how">
   <div class="wrap">
     <div class="sec-head">
+      <img class="mark" src="/assets/logo-128.png" alt="BoltProof">
       <h2>How it works.</h2>
       <p>Three steps. The last one is deliberately soft.</p>
     </div>
@@ -224,8 +249,10 @@
 
 <section class="pay">
   <div class="wrap">
+    <img class="mark" src="/assets/logo-128.png" alt="BoltProof">
     <h2>No obligation.<br>That's the point.</h2>
     <p>I have a normal corporate tech career. This is the part of the week I choose — because helping is the bit I actually like. Whatever you send, it keeps this a thing I get to do.</p>
+    <p class="sign">BoltProof</p>
   </div>
 </section>
 
@@ -254,8 +281,8 @@
 
 <footer>
   <div class="wrap">
-    <div>IT On Your Terms · Dubai, UAE</div>
-    <div>No fine print. No spam, ever.</div>
+    <span class="f-brand"><img src="/assets/logo-128.png" alt="BoltProof">BoltProof · Dubai, UAE</span>
+    <span>IT on your terms — no fine print, no spam, ever</span>
   </div>
 </footer>
 

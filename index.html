@@ -1,291 +1,67 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BoltProof — IT help, on your terms</title>
-<meta name="description" content="BoltProof — IT help on your terms. Corporate tech by day; your IT problems by choice. Laptops, security, AI — you pay what you feel, no obligation.">
-<link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<meta name="theme-color" content="#faf7f2">
-<style>
-  :root {
-    --bg: #faf7f2;
-    --bg-soft: #f2ece1;
-    --card: #fffdf9;
-    --dark: #191411;
-    --text: #262019;
-    --muted: #7c7264;
-    --warm: #f2a43c;
-    --coral: #f0705a;
-    --sage: #9db89a;
-    --on-dark: #f7f2ea;
-    --muted-dark: #a89b8a;
-    --maxw: 980px;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg); color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased; letter-spacing: -0.01em;
-    overflow-x: hidden;
-  }
-
-  /* ---------- floating orbs ---------- */
-  .orbs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-  .orb { position: absolute; border-radius: 50%; filter: blur(90px); will-change: transform; }
-  .orb-1 { width: 52vw; height: 52vw; min-width: 420px; min-height: 420px; left: -12vw; top: -14vh;
-    background: radial-gradient(circle at 35% 35%, rgba(255, 190, 96, 0.62), rgba(255, 190, 96, 0) 70%);
-    animation: drift1 34s ease-in-out infinite alternate; }
-  .orb-2 { width: 44vw; height: 44vw; min-width: 380px; min-height: 380px; right: -10vw; top: 6vh;
-    background: radial-gradient(circle at 40% 40%, rgba(240, 112, 90, 0.40), rgba(240, 112, 90, 0) 70%);
-    animation: drift2 42s ease-in-out infinite alternate; }
-  .orb-3 { width: 40vw; height: 40vw; min-width: 340px; min-height: 340px; left: 8vw; bottom: -16vh;
-    background: radial-gradient(circle at 45% 45%, rgba(157, 184, 154, 0.42), rgba(157, 184, 154, 0) 70%);
-    animation: drift3 38s ease-in-out infinite alternate; }
-  .orb-4 { width: 30vw; height: 30vw; min-width: 280px; min-height: 280px; right: 14vw; bottom: 10vh;
-    background: radial-gradient(circle at 50% 50%, rgba(255, 214, 150, 0.50), rgba(255, 214, 150, 0) 70%);
-    animation: drift4 29s ease-in-out infinite alternate; }
-  @keyframes drift1 { from { transform: translate(0, 0) scale(1); } to { transform: translate(9vw, 7vh) scale(1.18); } }
-  @keyframes drift2 { from { transform: translate(0, 0) scale(1.1); } to { transform: translate(-8vw, 9vh) scale(0.92); } }
-  @keyframes drift3 { from { transform: translate(0, 0) scale(0.95); } to { transform: translate(7vw, -8vh) scale(1.15); } }
-  @keyframes drift4 { from { transform: translate(0, 0) scale(1.05); } to { transform: translate(-6vw, -6vh) scale(0.9); } }
-  @media (prefers-reduced-motion: reduce) {
-    .orb { animation: none; }
-    html { scroll-behavior: auto; }
-  }
-
-  .page { position: relative; z-index: 1; }
-  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
-
-  /* nav */
-  nav {
-    position: sticky; top: 0; z-index: 10;
-    backdrop-filter: saturate(160%) blur(20px);
-    -webkit-backdrop-filter: saturate(160%) blur(20px);
-    background: rgba(250, 247, 242, 0.72);
-    border-bottom: 1px solid rgba(140, 110, 70, 0.10);
-  }
-  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; }
-  nav .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
-  nav .brand img { width: 26px; height: 26px; display: block; }
-  nav .brand span { font-size: 17px; font-weight: 700; letter-spacing: -0.015em; }
-  nav a.nav-cta {
-    font-size: 13px; color: #fff; text-decoration: none; border-radius: 980px; padding: 7px 16px;
-    background: linear-gradient(120deg, var(--warm), var(--coral));
-    box-shadow: 0 4px 14px rgba(240, 112, 90, 0.28);
-  }
-
-  /* hero */
-  .hero { text-align: center; padding: 96px 32px 80px; }
-  .hero .overline { font-size: 15px; font-weight: 650; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 22px; }
-  .hero h1 { font-size: clamp(40px, 7vw, 76px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.05; }
-  .hero h1 span {
-    background: linear-gradient(115deg, var(--warm) 10%, var(--coral) 90%);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-  }
-  .hero .sub { margin: 26px auto 0; max-width: 640px; font-size: 21px; line-height: 1.5; color: var(--muted); }
-  .hero .btns { margin-top: 40px; display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
-  .btn { display: inline-block; border-radius: 980px; padding: 14px 32px; font-size: 17px; font-weight: 500; text-decoration: none; }
-  .btn.primary {
-    background: linear-gradient(120deg, var(--warm), var(--coral)); color: #fff;
-    box-shadow: 0 8px 24px rgba(240, 112, 90, 0.30);
-  }
-  .btn.ghost { color: var(--coral); }
-  .btn.ghost::after { content: " ›"; }
-
-  /* sections */
-  section { padding: 88px 0; position: relative; }
-  section.alt { background: linear-gradient(180deg, rgba(242, 236, 225, 0.75), rgba(242, 236, 225, 0.45)); }
-  section.dark { background: var(--dark); color: var(--on-dark); }
-  .sec-head { text-align: center; margin-bottom: 56px; }
-  .sec-head .mark { width: 52px; height: 52px; margin: 0 auto 18px; display: block; }
-  .sec-head h2 { font-size: clamp(30px, 4.6vw, 46px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
-  .sec-head p { margin-top: 14px; font-size: 19px; color: var(--muted); max-width: 620px; margin-left: auto; margin-right: auto; }
-  section.dark .sec-head p { color: var(--muted-dark); }
-
-  /* tiles */
-  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .tile { background: var(--card); border-radius: 28px; padding: 44px 34px; min-height: 300px;
-    box-shadow: 0 6px 24px rgba(140, 100, 50, 0.08); }
-  .tile h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.015em; }
-  .tile p { margin-top: 12px; font-size: 17px; line-height: 1.5; color: var(--muted); }
-  .tile .k { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 14px;
-    background: var(--bg-soft); font-size: 22px; margin-bottom: 22px; }
-
-  /* steps */
-  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .step { padding: 8px 26px; }
-  .step .n { font-size: 60px; font-weight: 700; letter-spacing: -0.03em; color: rgba(247, 242, 234, 0.20); }
-  .step h3 { font-size: 24px; font-weight: 700; margin-top: 14px; letter-spacing: -0.015em; }
-  .step p { margin-top: 10px; font-size: 17px; color: var(--muted-dark); line-height: 1.5; }
-
-  /* pay */
-  .pay { text-align: center; padding: 96px 0; }
-  .pay .mark { width: 64px; height: 64px; margin: 0 auto 24px; display: block; }
-  .pay h2 { font-size: clamp(34px, 5vw, 54px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.08; }
-  .pay p { margin: 24px auto 0; max-width: 580px; font-size: 20px; line-height: 1.5; color: var(--muted); }
-  .pay .sign { margin-top: 28px; font-size: 15px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-
-  /* contact */
-  .contact { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .c-card { background: var(--card); border-radius: 28px; padding: 40px 34px; text-decoration: none; color: inherit; display: block;
-    box-shadow: 0 6px 24px rgba(140, 100, 50, 0.08); }
-  .c-card .k { display: block; font-size: 30px; margin-bottom: 18px; }
-  .c-card h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.015em; }
-  .c-card p { margin-top: 10px; font-size: 17px; color: var(--muted); line-height: 1.5; }
-  .c-card .go { display: inline-block; margin-top: 18px; font-size: 17px; font-weight: 650; color: var(--coral); }
-  .c-card .go::after { content: " ›"; }
-
-  /* footer */
-  footer { position: relative; background: rgba(242, 236, 225, 0.7); padding: 40px 0; }
-  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
-  footer .f-brand { display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--text); }
-  footer .f-brand img { width: 18px; height: 18px; }
-
-  /* ---------- mobile ---------- */
-  @media (max-width: 760px) {
-    .wrap { padding: 0 24px; }
-    .hero { padding: 64px 24px 56px; }
-    .hero .overline { margin-bottom: 18px; }
-    section { padding: 60px 0; }
-    .sec-head { margin-bottom: 40px; }
-    .trio { grid-template-columns: 1fr; }
-    .steps { grid-template-columns: 1fr; }
-    .tile { min-height: 0; padding: 38px 28px; }
-    .step { padding: 8px 20px; }
-    .contact { grid-template-columns: 1fr; }
-    .c-card { padding: 34px 28px; }
-    .pay { padding: 72px 0; }
-    .hero .btns { flex-direction: column; align-items: stretch; }
-    .hero .btn { text-align: center; }
-  }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="BoltProof helps UAE businesses use private AI on their own premises or in the cloud they choose.">
+  <link rel="icon" href="assets/favicon.ico" />
+  <link rel="canonical" href="https://boltproof.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="BoltProof" />
+  <meta property="og:title" content="BoltProof — Private AI for UAE businesses" />
+  <meta property="og:description" content="UAE-first private AI: answers from your approved SharePoint, OneDrive and Google Drive documents — cited, and deployed in Cloud, customer Private Cloud or On-Premises." />
+  <meta property="og:url" content="https://boltproof.com/" />
+  <meta property="og:image" content="https://boltproof.com/assets/og.jpg" />
+  <title>BoltProof — Private AI for UAE businesses</title>
+  <style>
+    :root{--ink:#071921;--soft:#f4f5f2;--mint:#63e3c0;--blue:#80baff;--line:#cbd2d3;--muted:#60717a;--card:#102b35}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--soft);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:16px;line-height:1.5}a{text-decoration:none;color:inherit}.nav{height:74px;display:flex;align-items:center;justify-content:space-between;max-width:1220px;margin:auto;padding:0 28px}.brand{font-weight:800;letter-spacing:-.06em;font-size:1.45rem}.brand span{color:#16725e}.navlinks{display:flex;gap:27px;align-items:center;font-size:.93rem}.button{display:inline-flex;align-items:center;justify-content:center;background:var(--mint);color:#04231c;padding:13px 19px;border-radius:999px;font-weight:750;border:0;cursor:pointer;font-size:.94rem}.button.dark{background:var(--ink);color:white}.hero{max-width:1220px;margin:0 auto;padding:74px 28px 54px;display:grid;grid-template-columns:1.05fr .95fr;gap:58px;min-height:670px;align-items:center}.eyebrow{font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;font-weight:800;color:#397260;margin-bottom:18px}.hero h1{font-size:clamp(3.5rem,7vw,6.9rem);line-height:.94;letter-spacing:-.075em;margin:0 0 25px;max-width:740px}.hero p{font-size:1.23rem;line-height:1.55;max-width:570px;color:#40525a;margin:0 0 31px}.note{font-size:.85rem;color:#66777d;margin-top:14px}.demo-window{background:#09232e;color:#edf7f5;border-radius:28px;padding:20px;box-shadow:0 26px 70px #0b202a33;min-height:448px;display:flex;flex-direction:column}.bar{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff20;padding:0 0 15px;margin-bottom:22px}.dots i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#ffffff55;margin-right:4px}.mode{font-size:.7rem;background:#ffffff15;padding:6px 9px;border-radius:999px;color:#bcecdf}.question{background:#ffffff10;border-radius:14px;padding:13px 15px;font-size:.91rem;align-self:flex-end;max-width:82%;margin:2px 0 17px}.answer{font-size:1.03rem;line-height:1.55;max-width:92%}.citation{display:block;background:#ffffff0e;border:1px solid #ffffff13;border-radius:11px;padding:10px 12px;margin-top:12px;font-size:.76rem;color:#bcecdf}.cite-dot{display:inline-block;background:var(--mint);width:7px;height:7px;border-radius:50%;margin-right:8px}.logos{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 28px;display:flex;justify-content:center;gap:min(9vw,120px);color:#50636b;font-size:.83rem;font-weight:700;letter-spacing:.03em;flex-wrap:wrap}.section{max-width:1220px;margin:auto;padding:120px 28px}.section.dark{max-width:none;background:var(--ink);color:#f5f8f7}.section.dark .inner{max-width:1220px;margin:auto}.kicker{font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;font-weight:800;color:#29745f}.section h2{font-size:clamp(2.6rem,5.3vw,5rem);line-height:.98;letter-spacing:-.065em;max-width:800px;margin:16px 0 24px}.section .lead{font-size:1.15rem;color:#52646d;max-width:610px}.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:53px}.choice{border:1px solid var(--line);padding:29px 26px;border-radius:20px;min-height:260px;background:#fafbf9}.choice .tag{font-size:.75rem;font-weight:800;color:#0e745d}.choice h3{font-size:1.55rem;letter-spacing:-.04em;margin:17px 0 11px}.choice p{color:#597078;margin:0}.number{font-size:.8rem;color:#5cdbb8;font-weight:800;letter-spacing:.12em}.how{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:52px}.how h3{font-size:1.45rem;letter-spacing:-.04em;margin:14px 0 9px}.how p{color:#bed0cf;margin:0;max-width:300px}.solution{display:grid;grid-template-columns:.9fr 1.1fr;gap:80px;align-items:center}.solution h2{margin-top:16px}.solution p{font-size:1.13rem;color:#52646d}.mini-demo{background:#dfeae7;border-radius:22px;padding:17px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:5px 0 19px}.tabs button{border:1px solid #b6c4c2;background:transparent;border-radius:999px;padding:7px 11px;font-weight:650;font-size:.76rem;cursor:pointer}.tabs button.active{background:#07302a;color:white;border-color:#07302a}.answerbox{background:#fff;border-radius:15px;padding:20px;min-height:210px;box-shadow:0 12px 25px #18332d12}.answerbox h4{margin:0 0 9px;font-size:.86rem;color:#417260}.answerbox p{font-size:.98rem;color:#243e42;margin:0}.source{margin-top:14px;border-top:1px solid #dde5e3;padding-top:11px;font-size:.75rem;color:#337562;font-weight:700}.promise{background:#e1f8f0;border-radius:28px;padding:54px;margin-top:30px;display:grid;grid-template-columns:1fr 1fr;gap:40px}.promise h3{font-size:2rem;letter-spacing:-.055em;margin:0}.promise ul{list-style:none;padding:0;margin:0}.promise li{padding:10px 0;border-bottom:1px solid #bde2d7;color:#365157}.cta{max-width:1220px;margin:auto;padding:100px 28px 120px;text-align:center}.cta h2{font-size:clamp(2.8rem,6vw,5.6rem);line-height:.95;letter-spacing:-.07em;max-width:860px;margin:0 auto 24px}.cta p{color:#52646d;font-size:1.14rem;max-width:600px;margin:0 auto 27px}.footer{border-top:1px solid var(--line);padding:28px;display:flex;justify-content:space-between;max-width:1220px;margin:auto;color:#617177;font-size:.84rem}.modal{position:fixed;inset:0;background:#001014aa;display:none;align-items:center;justify-content:center;padding:18px;z-index:4}.modal.show{display:flex}.form{background:#fff;border-radius:24px;max-width:560px;width:100%;padding:32px;position:relative}.close{position:absolute;right:20px;top:14px;font-size:1.5rem;border:0;background:none;cursor:pointer}.form h2{letter-spacing:-.045em;font-size:2rem;margin:0 0 8px}.form p{color:#587078}.form label{display:block;font-size:.78rem;font-weight:800;margin:14px 0 5px}.form input,.form select{width:100%;padding:12px;border:1px solid #cbd5d5;border-radius:10px;font:inherit}.form .button{margin-top:22px;width:100%}@media(max-width:800px){.navlinks{display:none}.hero,.solution{grid-template-columns:1fr;gap:35px;padding-top:36px}.hero{min-height:0}.choices,.how{grid-template-columns:1fr}.promise{grid-template-columns:1fr;padding:32px}.section{padding:82px 22px}.hero,.nav,.cta{padding-left:22px;padding-right:22px}.demo-window{min-height:380px}.footer{padding:22px;gap:14px;flex-direction:column}}
+  </style>
+  <style>
+    body{overflow-x:hidden;background:#071526;color:#eaf2f4}.nav{position:absolute;top:0;left:0;right:0;z-index:2;color:white}.brand span{color:#8ce8d2}.nav .button{background:white;color:#061d23}.hero{position:relative;max-width:none;min-height:760px;padding:175px max(28px,calc((100vw - 1164px)/2)) 74px;color:white;overflow:hidden;isolation:isolate}.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#061523ef 0%,#0a1c2dcc 43%,#07192338 100%),linear-gradient(0deg,#06111db8 0%,transparent 48%),url('assets/bg.webp') center/cover;z-index:-2;transform:scale(1.02);animation:landscape 16s ease-in-out infinite alternate}.hero:after{content:"";position:absolute;right:-170px;top:-180px;width:590px;height:590px;background:radial-gradient(circle,#f5aa7930 0%,#8fc9ff16 35%,transparent 68%);filter:blur(4px);pointer-events:none;z-index:-1;animation:drift 11s ease-in-out infinite alternate}.hero h1{max-width:720px;text-shadow:0 6px 30px #00131a99}.hero p{color:#e4eeed;max-width:560px}.hero .button.dark{background:white;color:#061d23}.hero .note{color:#d6e2df}.demo-window{position:relative;overflow:hidden;background:linear-gradient(145deg,#062731e8,#071924e8 55%,#0d3540e8);backdrop-filter:blur(10px);align-self:end;border:1px solid #d9f8f333;box-shadow:0 24px 70px #000b1466}.demo-window:before{content:"";position:absolute;inset:0;background:linear-gradient(118deg,transparent 0 48%,#aee8dd0d 54%,transparent 61%);pointer-events:none}.demo-window>*{position:relative}.answer{animation:arrive .8s .4s both}.citation{animation:arrive .8s both}.citation:nth-child(2){animation-delay:.9s}.citation:nth-child(3){animation-delay:1.2s}.logos{background:#071526;color:#b8d3cd;border-color:#263e53}.section{background:#091a2d;color:#edf3f4}.section .lead,.solution p{color:#aec2cb}.section.dark{background:#040d18}.choice{background:#0e2338;border-color:#2c4e64;color:#edf3f4;transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease}.choice p{color:#a9c0cb}.choice:hover{transform:translateY(-9px);box-shadow:0 22px 36px #000b142e;border-color:#f0a16f}.promise{background:linear-gradient(135deg,#112f46,#17243c);border:1px solid #31556b}.promise ul{color:#c5d7dc}.promise li{border-color:#3c5f70}.mini-demo{background:linear-gradient(135deg,#17384c,#27334a);position:relative;overflow:hidden}.mini-demo:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;background:#f1a16d35;filter:blur(25px);right:-130px;bottom:-150px;pointer-events:none}.answerbox{background:#f4f7f7}.tabs button{color:#dceaf0;border-color:#638096}.tabs button.active{background:#f0a16f;border-color:#f0a16f;color:#142333}.answerbox,.tabs{position:relative;z-index:1}.cta{background:#071526;color:#eef5f6}.cta p{color:#b4c9d1}.footer{background:#071526;border-color:#263e53;color:#9fb7c1}.button{transition:transform .25s ease,box-shadow .25s ease}.button:hover{transform:translateY(-2px);box-shadow:0 11px 22px #000b142e}.button:active{transform:translateY(0)}.tag{letter-spacing:.09em;color:#f0a16f}@keyframes landscape{to{transform:scale(1.075) translate(-.6%,-.3%)}}@keyframes drift{to{transform:translate(-45px,30px) scale(1.1)}}@keyframes arrive{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}@media(max-width:800px){.nav{position:absolute}.nav .button{display:none}.hero{min-height:800px;padding-top:140px}.hero .demo-window{margin-top:20px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+  </style>
+  <style>
+    /* Slow atmospheric light across the UAE landscape; deliberately separate from the demo panel. */
+    .hero:after{inset:-18%;right:auto;top:auto;width:auto;height:auto;background:radial-gradient(ellipse at 72% 10%,#ffd6a426 0%,transparent 36%),linear-gradient(126deg,transparent 26%,#ffe0b20b 36%,transparent 45%),linear-gradient(126deg,transparent 42%,#fff1d50a 51%,transparent 60%),linear-gradient(126deg,transparent 59%,#f5c78f08 67%,transparent 75%);filter:blur(3px);opacity:.72;mix-blend-mode:screen;animation:sunShimmer 18s ease-in-out infinite alternate}
+    @keyframes sunShimmer{to{transform:translate(-2.5%,1.5%);opacity:.94}}
+  </style>
+  <style>
+    /* The UAE landscape remains present throughout the journey, with each content layer tuned for contrast. */
+    body{background:#061523 url('assets/bg.webp') center/cover fixed}
+    .logos{background:linear-gradient(90deg,#061523eb,#0b2635df,#061523eb);backdrop-filter:blur(11px)}
+    .section{background:linear-gradient(116deg,#07182ee8,#0c2637dc 54%,#071524e8);backdrop-filter:blur(10px)}
+    .section.dark{background:linear-gradient(116deg,#030b15ed,#071d2add 55%,#030b15ed);backdrop-filter:blur(10px)}
+    .choice{background:linear-gradient(145deg,#102d40e8,#0b2034e7);backdrop-filter:blur(8px)}
+    .promise{background:linear-gradient(135deg,#10344bea,#1c2943e8);backdrop-filter:blur(10px)}
+    .mini-demo{background:linear-gradient(135deg,#173d50e8,#26354be8);backdrop-filter:blur(10px)}
+    .cta{background:linear-gradient(90deg,#061523ed,#0b2636e0,#061523ed);backdrop-filter:blur(10px)}
+    .footer{background:#061523ef;backdrop-filter:blur(10px)}
+  </style>
 </head>
 <body>
-
-<div class="orbs" aria-hidden="true">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
-  <div class="orb orb-4"></div>
-</div>
-
-<div class="page">
-
-<nav>
-  <div class="wrap">
-    <a class="brand" href="#top"><img src="/assets/logo-128.png" alt="BoltProof logo">BoltProof</a>
-    <a class="nav-cta" href="#contact">Get in touch</a>
-  </div>
-</nav>
-
-<header class="hero wrap" id="top">
-  <p class="overline">BoltProof · Dubai, UAE</p>
-  <h1>IT help,<br><span>on your terms.</span></h1>
-  <p class="sub">
-    Laptops, security, AI — if it's technology and it's getting in the way of your life, I can help.
-    You pay what you feel it's worth. No contracts, no meter, no obligation.
-  </p>
-  <div class="btns">
-    <a class="btn primary" href="#contact">Get in touch</a>
-    <a class="btn ghost" href="#help">What I help with</a>
-  </div>
-</header>
-
-<section class="alt" id="help">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2>What I help with.</h2>
-      <p>Three things, done properly. And a catch-all for the rest.</p>
-    </div>
-    <div class="trio">
-      <div class="tile">
-        <span class="k">💻</span>
-        <h3>Everyday IT</h3>
-        <p>Laptops, phones, Wi-Fi, printers, backups. The stuff that quietly eats your week — diagnosed, not guessed.</p>
-      </div>
-      <div class="tile">
-        <span class="k">🛡️</span>
-        <h3>Cyber security</h3>
-        <p>Passwords, 2FA, spotting scams, hardening your home or business — and a clear plan if something's already gone wrong.</p>
-      </div>
-      <div class="tile">
-        <span class="k">🤖</span>
-        <h3>AI</h3>
-        <p>Which tools are actually worth your time, how to get real use from them, and what not to trust them with.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="dark" id="how">
-  <div class="wrap">
-    <div class="sec-head">
-      <img class="mark" src="/assets/logo-128.png" alt="BoltProof">
-      <h2>How it works.</h2>
-      <p>Three steps. The last one is deliberately soft.</p>
-    </div>
-    <div class="steps">
-      <div class="step">
-        <div class="n">1</div>
-        <h3>Tell me what's going on.</h3>
-        <p>A message is enough — a sentence, a photo, a voice note. No forms, no ticketing, no jargon required.</p>
-      </div>
-      <div class="step">
-        <div class="n">2</div>
-        <h3>I help — however suits you.</h3>
-        <p>A call, a screen-share, or a written walkthrough. Most small things get sorted in one go.</p>
-      </div>
-      <div class="step">
-        <div class="n">3</div>
-        <h3>You pay what you feel.</h3>
-        <p>From coffee money to the equivalent of a good hour — or nothing at all, and a thank-you.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="pay">
-  <div class="wrap">
-    <img class="mark" src="/assets/logo-128.png" alt="BoltProof">
-    <h2>No obligation.<br>That's the point.</h2>
-    <p>I have a normal corporate tech career. This is the part of the week I choose — because helping is the bit I actually like. Whatever you send, it keeps this a thing I get to do.</p>
-    <p class="sign">BoltProof</p>
-  </div>
-</section>
-
-<section class="alt" id="contact">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2>Get in touch.</h2>
-      <p>Two ways. Both end with the same place: a conversation.</p>
-    </div>
-    <div class="contact">
-      <a class="c-card" href="https://maps.app.goo.gl/zanBjrXngYF7TECXA?g_st=ic" target="_blank" rel="noopener">
-        <span class="k">📍</span>
-        <h3>On Google</h3>
-        <p>See what other people say, read the reviews, leave one yourself if it earned it.</p>
-        <span class="go">View my Google profile</span>
-      </a>
-      <a class="c-card" href="https://wa.me/971585109454" target="_blank" rel="noopener">
-        <span class="k">💬</span>
-        <h3>WhatsApp</h3>
-        <p>Fastest path. Voice, text, or a photo of the problem — +971 58 510 9454.</p>
-        <span class="go">Message me</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <span class="f-brand"><img src="/assets/logo-128.png" alt="BoltProof">BoltProof · Dubai, UAE</span>
-    <span>IT on your terms — no fine print, no spam, ever</span>
-  </div>
-</footer>
-
-</div>
-</body>
-</html>
+  <nav class="nav"><a class="brand" href="#top"><svg class="mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 3 6 10v11c0 11.6 7.6 19 18 23 10.4-4 18-11.4 18-23V10L24 3Z" fill="#F2F5F8"/><path d="M27 12 16.5 27.5h6L20 36.5 31 21.5h-6.2L27 12Z" fill="#F2A93B"/></svg>Bolt<span>Proof</span></a><div class="navlinks"><a href="#how">How it works</a><a href="#deploy">Deployment</a><a href="#demo">Live demo</a><a href="#private">Private by design</a><button class="button" data-open>Book a demonstration</button></div></nav>
+  <main id="top">
+    <section class="hero"><div><div class="eyebrow">BoltProof · Private AI for UAE businesses</div><h1>Your knowledge.<br>On your terms.</h1><p>BoltProof turns the documents your team already relies on into clear, cited answers—running on your premises or in the cloud you choose.</p><button class="button dark" data-open>Book a demonstration</button><div class="note">No model account. No generic AI workflow. No forced cloud provider.</div></div><div class="demo-window" aria-label="Illustrative BoltProof answer"><div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="mode">BOLT PROOF · PRIVATE</span></div><div class="question">Which supplier handles emergency HVAC call-outs?</div><div class="answer">Nexus Facilities covers emergency HVAC response across all managed sites, with a four-hour on-site target under the current agreement.<span class="citation"><span class="cite-dot"></span>Supplier agreement · Section 4.2 · Open source</span><span class="citation"><span class="cite-dot"></span>Operations escalation SOP · Page 6 · Open source</span></div></div></section>
+    <div class="logos"><span>BUILT FOR UAE OPERATIONS</span><span>YOUR DATA, YOUR CHOICE</span><span>CITED ANSWERS</span><span>CLEAR DATA ROUTES</span></div>
+    <section class="section" id="how"><div class="kicker">The problem</div><h2>Your team has the answer.<br>Finding it takes too long.</h2><p class="lead">Policies, site manuals, supplier agreements and handover records should help your team act quickly—not create another search task.</p><div class="solution"><div><h2>A simpler way to work.</h2><p>Ask a question in plain language. BoltProof searches only the documents you approve, gives the answer, and shows exactly where it came from.</p><p>It is built for teams who need to move quickly and still check the facts.</p></div><div class="mini-demo" id="demo"><div class="tabs"><button class="active" data-profile="facilities">Facilities</button><button data-profile="property">Property</button><button data-profile="consulting">Consulting</button></div><div class="answerbox"><h4 id="demoQuestion">What is the escalation process for an after-hours maintenance issue?</h4><p id="demoAnswer">Log the issue with the duty manager, contact the approved emergency supplier, then record the outcome in the incident log before the next business day.</p><div class="source" id="demoSource">CITED · Operations escalation SOP · Pages 4–6 · synthetic demo data</div></div></div></div></section>
+    <section class="section dark"><div class="inner"><div class="kicker" style="color:#71e5c4">Simple from day one</div><h2>Connect. Ask. Verify.</h2><div class="how"><div><div class="number">01</div><h3>Connect what you approve</h3><p>Select the SharePoint, OneDrive or Google Drive folders that belong in your workspace.</p></div><div><div class="number">02</div><h3>Ask naturally</h3><p>Ask the question as you would ask an experienced colleague. No folder hunting or complicated search.</p></div><div><div class="number">03</div><h3>Check the source</h3><p>Open the cited document and excerpt before you act. Confidence comes with proof.</p></div></div></div></section>
+    <section class="section" id="deploy"><div class="kicker">Deployment choice</div><h2>Private means you decide where it runs.</h2><p class="lead">BoltProof is not tied to one cloud provider. Choose the environment that fits your business, your policies and your budget.</p><div class="choices"><article class="choice"><div class="tag">FASTEST PATH</div><h3>BoltProof Cloud</h3><p>A managed, UAE-focused cloud service. We operate the system so your team can get to work quickly.</p></article><article class="choice"><div class="tag">YOUR CLOUD</div><h3>Private Cloud</h3><p>Deploy BoltProof inside the cloud account and region your business chooses. You keep the infrastructure boundary.</p></article><article class="choice"><div class="tag">MAXIMUM CONTROL</div><h3>On-Premises</h3><p>Run BoltProof on hardware in your office or data centre. Your documents and models stay under your direct control.</p></article></div><div class="promise" id="private"><h3>One product.<br>Three ways to keep control.</h3><ul><li>Open-weight models—not a mandatory frontier-model API</li><li>Document answers with source citations</li><li>Read-only approved source connections</li><li>No automatic external-model fallback</li><li>Clear data-route discussion before deployment</li></ul></div></section>
+    <section class="cta"><div class="eyebrow">See it in your context</div><h2>Private AI that makes your business knowledge useful.</h2><p>Book a short demonstration and see how BoltProof works with the questions UAE operations teams ask every day.</p><button class="button dark" data-open>Book a demonstration</button></section>
+  </main><footer class="footer"><span class="f-brand"><svg class="mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 3 6 10v11c0 11.6 7.6 19 18 23 10.4-4 18-11.4 18-23V10L24 3Z" fill="#F2F5F8"/><path d="M27 12 16.5 27.5h6L20 36.5 31 21.5h-6.2L27 12Z" fill="#F2A93B"/></svg>Bolt<span>Proof</span></span><span>Private AI for UAE businesses — cited answers, on your terms.</span><span class="foot-links"><a href="/it-help/">IT support</a><a href="/legal/privacy.html">Privacy notice</a><a href="/legal/terms.html">Terms</a><a href="/legal/cookies.html">Cookies</a><a href="https://wa.me/971585109454" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:elias@boltproof.com">Email</a><a href="https://maps.app.goo.gl/zanBjrXngYF7TECXA?g_st=ic" target="_blank" rel="noopener">Google Business Profile</a></span><span>© 2026 BoltProof · pre-launch — no customer data, no subscription, no payment</span></footer>
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="formTitle"><form class="form" id="leadForm"><button type="button" class="close" aria-label="Close" data-close>×</button><h2 id="formTitle">See BoltProof in action.</h2><p>Tell us a little about your team. We’ll arrange a focused private demonstration.</p><label>Name<input required name="name" autocomplete="name"></label><label>Work email<input required type="email" name="email" autocomplete="email"></label><label>Company<input required name="company" autocomplete="organization"></label><label>Where should it run?<select name="deployment"><option>BoltProof Cloud</option><option>Our cloud account</option><option>On our premises</option><option>Not sure yet</option></select></label><button class="button dark" type="submit">Request a demonstration</button><div class="note">Requesting a demonstration does not create a subscription or require payment. No document upload required. A person replies with a call time.</div></form></div>
+  <script>
+    const profiles={facilities:["What is the escalation process for an after-hours maintenance issue?","Log the issue with the duty manager, contact the approved emergency supplier, then record the outcome in the incident log before the next business day.","CITED · Operations escalation SOP · Pages 4–6 · synthetic demo data"],property:["What remains outstanding before practical completion?","Two open items remain: fire-door signage at Tower B and the lift handover certificate. Both are assigned for close-out this week.","CITED · Handover checklist · Items 42 & 57 · synthetic demo data"],consulting:["Which projects are most relevant to a retail proposal?","Three recent projects match: the retail operations review, the multi-site rollout, and the supplier rationalisation programme.","CITED · Case studies · Sections 2, 5 & 8 · synthetic demo data"]};document.querySelectorAll('[data-profile]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-profile]').forEach(x=>x.classList.remove('active'));b.classList.add('active');const d=profiles[b.dataset.profile];demoQuestion.textContent=d[0];demoAnswer.textContent=d[1];demoSource.textContent=d[2]});const modal=document.getElementById('modal');document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>modal.classList.add('show'));document.querySelector('[data-close]').onclick=()=>modal.classList.remove('show');modal.onclick=e=>{if(e.target===modal)modal.classList.remove('show')};leadForm.onsubmit=e=>{e.preventDefault();const f=new FormData(leadForm),s=`BoltProof demonstration request\n\nName: ${f.get('name')}\nEmail: ${f.get('email')}\nCompany: ${f.get('company')}\nDeployment: ${f.get('deployment')}`;location.href='mailto:elias@boltproof.com?subject='+encodeURIComponent('BoltProof demonstration request')+'&body='+encodeURIComponent(s)};
+  </script>
+  <style>
+    .demo-window{min-height:448px;padding:22px}.concierge-title{display:flex;align-items:center;gap:10px;font-weight:760;font-size:.94rem}.online{width:9px;height:9px;border-radius:999px;background:#73e7c5;box-shadow:0 0 0 4px #73e7c51c}.concierge-kicker{margin:25px 0 8px;font-size:.76rem;color:#a6c9c8;letter-spacing:.11em;font-weight:800}.concierge-copy{font-size:1.25rem;line-height:1.3;letter-spacing:-.03em;margin:0 0 21px}.concierge-form{display:grid;gap:10px}.concierge-form input,.concierge-form textarea,.concierge-input{width:100%;border:1px solid #d9f8f326;border-radius:12px;background:#ffffff10;color:#f5fffd;padding:12px 13px;font:inherit;outline:0}.concierge-form textarea{resize:vertical;min-height:74px}.concierge-form input::placeholder,.concierge-form textarea::placeholder,.concierge-input::placeholder{color:#bdd7d2}.concierge-form input:focus,.concierge-form textarea:focus,.concierge-input:focus{border-color:#83ead2;background:#ffffff16}.concierge-submit{border:0;border-radius:12px;background:#8ce8d2;color:#06211f;font:700 .91rem inherit;padding:12px;cursor:pointer;margin-top:2px}.concierge-privacy{font-size:.72rem;line-height:1.4;color:#a5bfbb;margin:2px 0 0} .brand{display:inline-flex;align-items:center;gap:10px}.brand svg{width:30px;height:30px;flex:none}.f-brand{display:inline-flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.05em}.f-brand svg{width:24px;height:24px}.foot-links a{color:#cfe0e6}.foot-links a:not(:last-child){margin-right:16px}
+  </style>
+  <script>
+    const boltProofWhatsAppBusinessNumber = '971585109454';
+    const concierge = document.querySelector('.demo-window');
+    function renderConciergeGate(){
+      concierge.setAttribute('aria-label','Message BoltProof on WhatsApp');
+      concierge.innerHTML = `<div class="bar"><div class="concierge-title"><span class="online"></span> BoltProof concierge</div><span class="mode">WHATSAPP</span></div><div class="concierge-kicker">Start a conversation</div><p class="concierge-copy">Tell us what you need. We’ll open WhatsApp with everything ready.</p><form class="concierge-form" id="conciergeGate"><input required name="name" autocomplete="name" placeholder="Your name"><input required name="mobile" autocomplete="tel" inputmode="tel" placeholder="Mobile number"><textarea required name="message" placeholder="How can we help?"></textarea><button class="concierge-submit" type="submit">Message BoltProof on WhatsApp</button><p class="concierge-privacy">Submitting a request does not create a subscription or require payment. These details are not stored by this website — sending opens WhatsApp with a pre-filled message. Please do not share confidential documents here.</p></form>`;
+      document.getElementById('conciergeGate').onsubmit = event => {event.preventDefault(); const data = new FormData(event.currentTarget); const text=`Hello BoltProof, I’m ${data.get('name')}.\n\nMobile: ${data.get('mobile')}\n\nEnquiry: ${data.get('message')}`; window.location.href=`https://wa.me/${boltProofWhatsAppBusinessNumber}?text=${encodeURIComponent(text)}`;};
+    }
+    renderConciergeGate();
+  </script>
+</body></html>
